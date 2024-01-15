@@ -1,6 +1,7 @@
 import { Currency, Data, ReturnObject } from "@/ts_classes/ts_export_classes"
+import { UUID } from "crypto"
 
-const api_key: string = 'f19f3113-c6ae-409a-9ab7-c3ee49a9f55e'
+const api_key: UUID = process.env.API_KEY as UUID || 'testapik-9c7d-444d-8bf1-e3f125ba72b2'
 
 
 //todo
@@ -208,7 +209,7 @@ export async function payAnEvent(email: string, screen_name: string, event_name:
     return returnObject
 }
 export async function addParticipant(adminEmail: string, screen_name: string, email: string): Promise<ReturnObject> {
-    //get admin key 
+    //get admin key
     const responeseAdminKey = await getNeededDatafromAdmin(adminEmail)
     if (responeseAdminKey.error) {
         return responeseAdminKey
@@ -248,7 +249,7 @@ export async function addParticipant(adminEmail: string, screen_name: string, em
 }
 
 export async function addEvent(adminEmail: string, event_name: string, event_date: string, start_time: string, currency: Currency, price: number): Promise<ReturnObject> {
-    //get admin key 
+    //get admin key
     const responeseAdminKey = await getNeededDatafromAdmin(adminEmail)
     if (responeseAdminKey.error) {
         return responeseAdminKey
@@ -276,7 +277,7 @@ export async function addEvent(adminEmail: string, event_name: string, event_dat
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
     }
-    
+
     //add event
     const responese = await fetch('http://localhost:4000/event/add', optionFetch)
     const data = await responese.json()
@@ -411,6 +412,6 @@ export async function datalistFetch(option: Choose, adminEmail: string): Promise
         }
         returnObject.data.push(...data.map(d => d.name))
     }
-    
+
     return returnObject
 }

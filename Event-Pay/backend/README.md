@@ -1,14 +1,22 @@
+# Event Pay Backend
+
+## Backend setup
+
 installieren der Node-Packages
 
-```js
+```sh
 npm install
 ```
 
 starten des "Servers"
 
-```js
+```sh
 node ./server.js
 ```
+
+## Database setup
+
+PGSQL Datenbank erstellen, [SQL Datei](../sql/structure_script.sql) importieren und Parameter in `.env` Datei hinzufügen ([.env.example](.env.example) als Template verwenden).
 
 ---
 

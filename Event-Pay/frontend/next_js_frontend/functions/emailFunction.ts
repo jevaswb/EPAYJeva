@@ -1,4 +1,4 @@
-const api_key = 'f19f3113-c6ae-409a-9ab7-c3ee49a9f55e'
+const api_key = process.env.API_KEY || 'testapik-9c7d-444d-8bf1-e3f125ba72b2'
 
 export default async function sendEmail(func: string, data: any) {
     data["test_key"] = api_key

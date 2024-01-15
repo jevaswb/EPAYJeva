@@ -2,10 +2,10 @@ const { addAdmin, getAdmin, getAdminId, logOut } = require('../controller/admin_
 
 const router = require('express').Router()
 
-router.post('/add',addAdmin)
+router.post('/add', addAdmin)
 
-router.post('/get',getAdmin)
+router.post('/get', getAdmin)
 
 router.post('/getKey', getAdminId)
 
-module.exports =  router
+module.exports = router

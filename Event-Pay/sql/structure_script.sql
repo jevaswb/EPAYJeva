@@ -1,4 +1,4 @@
--- create type "currency" as enum ('€','$','£');
+create type "currency" as enum ('€','$','£');
 
 drop table if exists "admin";
 create table "admin"(
@@ -70,8 +70,6 @@ alter table "event_participant"
     add foreign key (event_id) references "event" (id),
     add foreign key (participant_id) references "participant" (id);
 
---cosntraints
+-- constraints
 
 --participant name must be unique for the admin
-
-

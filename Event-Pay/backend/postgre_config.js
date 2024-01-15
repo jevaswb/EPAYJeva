@@ -5,12 +5,13 @@ const Postgres = require('pg')
 const key = process.env.DB_ROOT_KEY
 const user = process.env.DB_ROOT_USER
 const database = process.env.DB_DATABASE
+const host = process.env.DB_HOST || 'localhost'
 const port = process.env.DB_PORT
 
 
 const postgre = new Postgres.Pool({
     user: `${user}`,
-    host: 'localhost',
+    host: `${host}`,
     database: `${database}`,
     password: `${key}`,
     port: `${port}`,
@@ -19,4 +20,4 @@ postgre.connect();
 
 module.exports = {
     postgre
-} 
+}

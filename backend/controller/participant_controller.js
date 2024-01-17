@@ -1,6 +1,7 @@
 const db = require('../postgre_config')
 const { check_key } = require('../functions');
 const { json } = require('express');
+const crypto = require('crypto');
 
 const getAllParticipantScreenNames = (req, res, next) => {  //post
     const test_key = req.body.test_key
@@ -34,7 +35,7 @@ const getParticipant = (req, res, next) => {  //post
             res.status(500).json(JSON.stringify('Something went wrong. Please try again later'))
             return
         }
-        
+
         if(result.rowCount === 0){
             res.status(404).json('404 - Participant Not found')
             return

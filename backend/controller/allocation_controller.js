@@ -2,7 +2,7 @@ const db = require('../postgre_config')
 const { check_key } = require('../functions');
 const { json } = require('express');
 
-//todo i do not test if it work when you have an array with more than one participant and event 
+//todo i do not test if it work when you have an array with more than one participant and event
 //todo i do not test if it work when you have an array with more than one participant and event and one of this values cause an error at db.query
 const addAllocation = async (req, res, next) => {  //post
     const test_key = req.body.test_key
@@ -54,13 +54,13 @@ const addAllocation = async (req, res, next) => {  //post
             }
         }
     }
-    
+
     const message = { status: null, message: {message: null, issue_values: []} }
     //actually insert into table
     const query = `insert into event_participant(event_id, participant_id) values ($1,$2);`
     for (const participant_id of participant_array) {
         for (const event_id of event_array) {
-            
+
             try {
                 const result = await db.postgre.query(query, [event_id, participant_id])
                 //everythink ok

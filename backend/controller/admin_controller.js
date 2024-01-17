@@ -1,6 +1,7 @@
 const db = require('../postgre_config')
 const { check_key, hash_password, check_hash } = require('../functions');
 const { json } = require('express');
+const crypto = require('crypto');
 
 const id = []
 
@@ -58,8 +59,8 @@ const getAdminId = (req, res, next) => {
     if (check_key(test_key)) { res.status(500).json(JSON.stringify('Something went wrong. Please try again later')); return }
 
     const email = req.body.email
-    
-    //todo maybe field logged in -> boolean db at table admin    
+
+    //todo maybe field logged in -> boolean db at table admin
     //get the admin_id out of the database
     const query = 'select a.id FROM "admin" a where a.email = $1'
     db.postgre.query(query, [email], (error, result) => {
@@ -71,11 +72,11 @@ const getAdminId = (req, res, next) => {
         if (result.rowCount > 1) {res.status(405).json(JSON.stringify('Data-response rejected! - Something went wrong. Please try again later')); return }
         //console.log("db id", result.rows[0])
         if (undefined === `${id.find(item => `${item.id}` === `${result.rows[0].id}`)}`) { res.status(500).json(JSON.stringify('Internal Error - Something went wrong. Please try again later')); return }
-        
+
         //ok handling
         //console.log("script id", id)
         res.status((id.length === 0) ? 404 : 200).json((id.length === 0) ? JSON.stringify(`Not found - Please try again later`) : JSON.stringify(`${result.rows[0].id}`))
-    })   
+    })
 }
 
 const logOut = (req, res, next) => {
@@ -88,7 +89,7 @@ const logOut = (req, res, next) => {
 
     const loggedIn = id.filter(items => items.email != email)
     if( loggedIn.length + 1 !== id.length ) { res.status(500).json(JSON.stringify('Something went wrong. Please try again later')); return}
-    res.status(200).json(JSON.stringify('Logged out successful'))   
+    res.status(200).json(JSON.stringify('Logged out successful'))
 }
 
 module.exports = {
